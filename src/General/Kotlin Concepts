@@ -1,0 +1,22 @@
+
+
+Lazy Versus Lateinit
+Both lateinit and lazy are keywords in Kotlin used for property initialization, but they differ in how and when the initialization happens:
+
+* lateinit:
+
+Delays initialization: Allows you to declare a property but postpone its initialization until later in the code.
+Non-nullable: The property type must be non-null (no null values allowed).
+Manual initialization: You are responsible for initializing the property before accessing it.
+Error handling: Attempting to access an uninitialized lateinit property throws a specific exception, helping catch errors early.
+No thread safety: You need to manage thread safety yourself if accessing the property from multiple threads.
+
+* lazy:
+
+Lazy initialization: The property is only initialized the first time it's accessed. Subsequent accesses return the same initialized value.
+Nullable or non-nullable: The property type can be either nullable or non-nullable.
+Automatic initialization: The initialization logic is provided within a code block that runs on first access.
+Thread-safe by default: Accessing the property from multiple threads is safe because initialization is synchronized.
+
+Use lateinit when a property needs to be initialized after the constructor, but you know for sure it will be initialized before being used (e.g., a view reference obtained in onCreate).
+Use lazy when a property might not be used at all, and you want to avoid unnecessary initialization overhead (e.g., a network client instance).
